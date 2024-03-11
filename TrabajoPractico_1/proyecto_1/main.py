@@ -1,1 +1,2 @@
 # Aplicación principal
+print("hola")
