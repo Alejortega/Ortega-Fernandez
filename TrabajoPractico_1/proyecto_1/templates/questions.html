@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas y Respuestas</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .options button {
+            margin-bottom: 5px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .options button:hover {
+            background-color: #0056b3;
+        }
+
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .next-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido, {{ user }}!</h1>
+        <h2>Trivia</h2>
+        <form action="/check-answer" method="POST">
+            {% for pregunta, correct_option, incorrect_options in options %}
+                <div class="question">
+                    <h3>{{ pregunta }}</h3>
+                </div>
+                <div class="options">
+                    {% for incorrect_option in incorrect_options %}
+                        <button type="submit" name="answer" value="{{ incorrect_option }}">{{ incorrect_option }}</button>
+                    {% endfor %}
+                    <button type="submit" name="answer" value="{{ correct_option }}">{{ correct_option }}</button>
+                    <input type="hidden" name="correct_answer" value="{{ correct_option }}">
+                </div>
+                {% if loop.last and options|length > 1 %}
+                    <button type="submit" name="next_question" class="next-btn">Siguiente Frase</button>
+                {% endif %}
+            {% endfor %}
+        </form>
+    </div>
+</body>
+</html>
+
