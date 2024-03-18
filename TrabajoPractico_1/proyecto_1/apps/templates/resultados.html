@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+</head>
+<body>
+    <p>{{ mensaje }}</p>
+    {% if mensaje == "Correcto" %}
+        <p>¡Bien hecho!</p>
+    {% elif mensaje == "Incorrecto" %}
+        <p>La respuesta correcta era: {{ respuesta_correcta }}</p>
+    {% endif %}
+</body>
+</html>

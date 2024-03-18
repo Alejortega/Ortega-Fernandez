@@ -1,0 +1,71 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia de Películas</title>
+    <style>
+        body {
+            background-color: LightSalmon; /* Cambia LightSalmon al color que desees */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Hace que la página ocupe todo el alto de la ventana */
+            margin: 0; /* Elimina el margen predeterminado del cuerpo */
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px; /* Espacio entre el formulario y los botones */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* Espacio entre los botones */
+        }
+
+        button {
+            padding: 10px 20px;
+            width: 200px; /* Ancho fijo para los botones */
+            
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trivia de Películas</h1>
+    <p>Bienvenido a la Trivia de Películas. Para comenzar a jugar, ingresa el número de frases deseadas y su nombre.</p>
+
+    <form action="/jugar" method="post">
+        <label for="num_frases">Número de Frases:</label>
+        <input type="number" id="num_frases" name="num_frases" min="3" required><br><br>
+
+        <label for="nombre_usuario">Nombre de Usuario:</label>
+        <input type="text" id="nombre_usuario" name="nombre_usuario" required><br><br>
+
+        <!--<input type="submit" value="Iniciar Juego" style="width: 200px;">  Ancho fijo para el botón de iniciar juego -->
+    </form>
+
+    <div class="button-container">
+        <a href="/iniciar_juego"><button>Iniciar Juego</button></a>
+        <a href="/listar_peliculas"><button>Listar Películas</button></a>
+        <a href="/resultados"><button>Ver Resultados Históricos</button></a>
+    </div>
+    
+</body>
+</html>
+
+    
+
+
+
+

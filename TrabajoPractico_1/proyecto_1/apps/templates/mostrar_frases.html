@@ -1,0 +1,22 @@
+
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia</title>
+</head>
+<body>
+    <h1>Trivia de Películas!</h1>
+    <p>{{ frase }}</p>
+    <form action="/verificar_respuesta" method="post">
+        <ul>
+            {% for opcion in opciones %}
+                
+                <li><input type="radio" name="respuesta" value="{{ opcion }}"> {{ opcion }}</li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

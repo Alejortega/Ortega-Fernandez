@@ -1,0 +1,76 @@
+"""
+from flask import Flask
+
+app = Flask("server")
+
+ruta_archivo = r"C:/Com1_PA_2024/frases_de_peliculas.txt"  # Cambié las barras invertidas por barras inclinadas
+
+info = {}
+
+with open(ruta_archivo, "r") as file:
+    lineas = file.readlines()
+
+for l in lineas:
+    frase, pelicula = l.strip().split(";")  
+    pelicula = pelicula.lower().strip()
+    info[pelicula].append(frase.strip())
+
+print(info)
+"""
+from flask import Flask, render_template, request, redirect, url_for
+import random
+
+app = Flask("server")
+
+ruta_archivo = "C:/Com1_PA_2024/frases_de_peliculas.txt"
+
+info = {}
+
+# Cargar información del archivo
+with open(ruta_archivo, "r") as file:
+    lineas = file.readlines()
+
+for l in lineas:
+    frase, pelicula = l.strip().split(";")  
+    pelicula = pelicula.lower().strip()
+    if pelicula not in info:
+        info[pelicula] = []
+    info[pelicula].append(frase.strip())
+
+# Lista de películas sin repetir y en orden alfabético
+peliculas = sorted(list(set(info.keys())))
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/start", methods=["POST"])
+def start():
+    num_frases = int(request.form["num_frases"])
+    if num_frases < 3:
+        return "El número de frases debe ser mayor o igual a 3."
+    else:
+        return redirect(url_for("play_trivia", num_frases=num_frases))
+
+@app.route("/play_trivia/<int:num_frases>", methods=["GET", "POST"])
+def play_trivia(num_frases):
+    if request.method == "GET":
+        return render_template("play_trivia.html", num_frases=num_frases, peliculas=peliculas)
+    elif request.method == "POST":
+        pelicula_elegida = request.form["pelicula"]
+        aciertos = 0
+        frases_elegidas = random.sample(lineas, num_frases)
+        for l in frases_elegidas:
+            frase, pelicula = l.strip().split(";")
+            if pelicula.lower().strip() == pelicula_elegida.lower().strip():
+                aciertos += 1
+        return f"Puntuación final: {aciertos}/{num_frases}"
+
+@app.route("/list_movies")
+def list_movies():
+    return render_template("list_movies.html", peliculas=peliculas)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
