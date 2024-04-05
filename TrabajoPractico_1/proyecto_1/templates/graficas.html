@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas</title>
+    <style>
+        body {
+            background-image: url('../static/grafica.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Color del texto */
+    }
+    </style>
+</head>
+<body>
+    <h1>Gráficas</h1>
+    <div>
+        <h2>Gráfica de Curvas</h2>
+        <img src="data:image/png;base64,{{ curvas_img }}" alt="Gráfica de Curvas">
+    </div>
+    <div>
+        <h2>Gráfica de Torta</h2>
+        <img src="data:image/png;base64,{{ torta_img }}" alt="Gráfica de Torta">
+    </div>
+    <form action="/descargar_pdf" method="post">
+        <button type="submit">Descargar PDF</button>
+    </form>
+    <form action="{{ url_for('index') }}" method="get">
+        <button type="submit">Volver al inicio</button>
+    </form>
+
+</body>
+</html>

@@ -35,16 +35,20 @@
             background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
+            max-width: 400px; /* Ancho máximo del contenedor */
+            margin: 0 auto; /* Centra el contenedor horizontalmente */
         }
 
         .form-container input[type="number"],
         .form-container input[type="text"],
         .form-container button {
             margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box; /* Incluye el relleno y el borde en el ancho total */
         }
 
         .form-container button {
-            padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -61,51 +65,57 @@
             font-size: 18px;
             color: #333;
         }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <img src="../static/pelicula.jpg" alt="Imagen de fondo" class="background-img">
-    
+
     <div class="form-container">
-        <form id="question.html" action="/process-form" method="POST">
-            <h1><label for="num_questions">Número de Preguntas:</label>
-            <input type="number" class="form-control mb-3" id="num_questions" name="num_questions" required>
-            </h1>
-            <h1><label for="user">Nombre de Usuario:</label>
-            <input type="text" class="form-control mb-3" id="user" name="user" required>
-            </h1>
-            <button type="submit" id="generate-btn">
-                Iniciar Trivia
-            </button>
-    
+        <!-- Introducción -->
+        <p>¡Bienvenido a la Trivia de Películas!
+            </p>
+        <p>
+            Para comenzar, ingresa la cantidad de frases deseadas (deben ser al menos 3) y tu nombre de usuario. El juego consiste en adivinar a qué película pertenece una determinada frase entre tres opciones. Una vez elegida la opción que creas correcta, avanzarás a la siguiente frase hasta acabar la partida. Al finalizar, podrás ver los aciertos obtenidos. ¡A jugar!
+            </p>
+
+        <!-- Formulario de preguntas -->
+        <form id="frases-form" action="/process-form" method="POST" onsubmit="return validateForm()">
+            <!-- Campos del formulario -->
+            <h1><label for="num_frases">Número de Frases:</label></h1>
+            <input type="number" class="form-control mb-3" id="num_frases" name="num_frases" required>
+            <div id="error-message" class="error-message"></div>
+
+            <h1><label for="Usuario">Nombre de Usuario:</label></h1>
+            <input type="text" class="form-control mb-3" id="Usuario" name="Usuario" required>
+
+            <!-- Botón de envío -->
+            <button type="submit" id="generate-btn">Iniciar Trivia</button>
         </form>
 
-
+        <!-- Botones adicionales -->
         <div class="button-container">
             <a href="/listar_peliculas"><button>Listar Películas</button></a>
             <a href="/resultados"><button>Ver Resultados Históricos</button></a>
         </div>
-    
-            
-            
-            
-        </form>
     </div>
+
+    <!-- Script de validación del formulario -->
     <script>
-        document.getElementById('question-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            let background = document.querySelector('.background-img');
-            if (background) {
-                background.style.display = 'none';
-            } else {
-                background.style.display = 'block';
+        function validateForm() {
+            var numFrases = document.getElementById('num_frases').value;
+            if (parseInt(numFrases) < 3) {
+                var errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = 'Por favor, ingresa al menos 3 frases.';
+                return false; // Evita que el formulario se envíe
             }
-        });
+            return true; // Envía el formulario si la validación pasa
+        }
     </script>
-    </form>
-
-
-    
-
 </body>
 </html>

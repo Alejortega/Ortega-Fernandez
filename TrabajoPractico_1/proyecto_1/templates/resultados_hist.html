@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados Históricos</title>
+    <style>
+        body {
+            background-image: url('../static/resultados.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Color del texto */
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Fondo semitransparente para mejor legibilidad */
+            border-radius: 10px; /* Borde redondeado para la tabla */
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            /* Borde inferior gris claro */
+        }
+        th {
+            background-color: #f2f2f2;
+            /* Fondo gris claro para encabezados */
+            font-weight: bold;
+        }
+        td {
+            background-color: #f8f8f8;
+            /* Fondo más claro para las celdas de datos */
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            /* Color azul para el botón */
+            color: #fff;
+            /* Color del texto del botón */
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+            /* Color azul oscuro al pasar el cursor sobre el botón */
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultados Históricos</h1>
+    <table>
+        <tr>
+            <th>Usuario</th>
+            <th>Aciertos</th>
+            <th>Fecha</th>
+        </tr>
+        {% for resultado in resultados %}
+        <tr>
+            <td>{{ resultado[0] }}</td>
+            <td>{{ resultado[1] }}</td>
+            <td>{{ resultado[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="{{ url_for('mostrar_graficas') }}" method="get">
+        <button type="submit">Ver resultados de manera gráfica</button>
+    </form>
+    <form action="{{ url_for('index') }}" method="get">
+        <button type="submit">Volver al inicio</button>
+    </form>
+</body>
+</html>
+
+
+            

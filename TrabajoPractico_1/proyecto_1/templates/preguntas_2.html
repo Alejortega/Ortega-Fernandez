@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta 2</title>
+    <style>
+        /* Estilos aquí */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pregunta 2</h2>
+        <form action="/check-answer" method="POST">
+            <div class="question">
+                <h3>{{ pregunta }}</h3>
+            </div>
+            <div class="options">
+                {% for incorrect_option in incorrect_options %}
+                    <button type="submit" name="answer" value="{{ incorrect_option }}">{{ incorrect_option }}</button>
+                {% endfor %}
+                <button type="submit" name="answer" value="{{ correct_option }}">{{ correct_option }}</button>
+                <input type="hidden" name="correct_answer" value="{{ correct_option }}">
+            </div>
+        </form>
+        <a href="pregunta3.html">Siguiente Pregunta</a>
+    </div>
+</body>
+</html>

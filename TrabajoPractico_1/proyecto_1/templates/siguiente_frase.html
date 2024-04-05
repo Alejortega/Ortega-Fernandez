@@ -12,23 +12,24 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f8f9fa;
+            background-image: url('../static/trivia.png'); /* Cambia 'ruta/de/tu/imagen.jpg' por la ruta de tu imagen de fondo */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
-
-        .container {max-width: 800px;
+        .container {
+            max-width: 800px;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para hacer el contenido legible */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-
         .question {
             margin-bottom: 20px;
         }
-
 
         .options button {
             margin-bottom: 5px;
@@ -42,11 +43,9 @@
             transition: background-color 0.3s ease;
         }
 
-
         .options button:hover {
             background-color: #0056b3;
         }
-
 
         .next-btn {
             margin-top: 20px;
@@ -59,41 +58,37 @@
             transition: background-color 0.3s ease;
         }
 
-
         .next-btn:hover {
             background-color: #218838;
         }
-/* Estilos para el mensaje de respuesta */
-.message {
+
+        /* Estilos para el mensaje de respuesta */
+        .message {
             margin-top: 20px;
             font-weight: bold;
         }
 
-
         .correct {
-            color: green;
+            color: rgb(7, 236, 7);
         }
 
-
         .incorrect {
-            color: red;
+            color: rgb(114, 4, 4);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        
-        <h2>Trivia</h2>
-        <form action="/check-answer" method="POST">
-            <div class="question">
-                <h3>{{ question[0] }}</h3>
+        <form action="/check-respuesta" method="POST">
+            <div class="frases">
+                <h3>{{ frases[0] }}</h3>
             </div>
             <div class="options">
-                {% for option in options %}
-                    <button type="submit" name="answer" value="{{ option }}">{{ option }}</button>
+                {% for opcion in opciones %}
+                    <button type="submit" name="answer" value="{{ opcion }}">{{ opcion }}</button>
                 {% endfor %}
             </div>
-            <input type="hidden" name="correct_answer" value="{{ question[1] }}">
+            <input type="hidden" name="correct_answer" value="{{ frases[1] }}">
            
         </form>
 

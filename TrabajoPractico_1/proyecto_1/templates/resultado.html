@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('../static/final.png'); /* Cambia la ruta de tu imagen de fondo */
+            background-size: 1500px 800px; /* Define el tamaño de la imagen de fondo */
+            background-repeat: no-repeat;
+            background-position: center;
+            padding-bottom: 100px; /* Espacio para el botón */
+        }
+
+        .result-container {
+            text-align: center;
+            background-color: rgba(240, 240, 240, 0.9); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        .button-container {
+            position: absolute;
+            bottom: 20px; /* Espaciado desde la parte inferior */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        {% if message %}
+            <h1>{% if session['respondio_correctamente'] %}<span class="correct">{{ message }}</span>{% else %}<span class="incorrect">{{ message }}</span>{% endif %}</h1>
+            {% if not session['respondio_correctamente'] %}
+                <p>{{ respuesta_correcta }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="button-container">
+        <a href="/"><button>Volver al inicio</button></a>
+    </div>
+</body>
+</html>
+
+
+

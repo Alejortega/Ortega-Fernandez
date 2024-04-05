@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <head>
+        <title>Resultados Históricos</title>
+    </head>
+    <body>
+        <h1>Resultados Históricos</h1>
+        <table>
+            <tr>
+                <th>Usuario</th>
+                <th>Aciertos</th>
+                <th>Fecha</th>
+            </tr>
+            {% for resultado in resultados %}
+            <tr>
+                <td>{{ resultado[0] }}</td>
+                <td>{{ resultado[1] }}</td>
+                <td>{{ resultado[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <form action="{{ url_for('mostrar_graficas') }}" method="get">
+            <button type="submit">Ver resultados de manera gráfica</button>
+        </form>
+        <form action="{{ url_for('index') }}" method="get">
+            <button type="submit">Volver al inicio</button>
+        </form>
+    </body>
+    </html>
+    

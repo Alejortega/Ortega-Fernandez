@@ -4,15 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Películas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Color de fondo alternativo */
+        }
+
+        .background-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1400px;
+            height: 1610px;
+            z-index: -1;
+        }
+
+        .list-container {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5); /* Color de fondo de la lista con transparencia */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra para efecto de elevación */
+            color: #333; /* Color del texto */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            color: #000000; /* Color del texto de la lista */
+        }
+    </style>
 </head>
 <body>
-    <h1>Listado de Películas</h1>
-    <ul>
-        {% for pelicula in pelicula %}
-            <li>{{ pelicula }}</li>
-        {% endfor %}
-    </ul>
+    <div class="background-img">
+        <img src="../static/lista_cine.png" alt="Imagen de fondo" style="width: 100%; height: 100%;">
+    </div>
+    <div class="list-container">
+        <h1 style="color: #333;">Listado de Películas</h1>
+        <ul>
+            {% for pelicula in pelicula %}
+                <li>{{ pelicula }}</li>
+            {% endfor %}
+        </ul>
+        <form action="{{ url_for('index') }}" method="get">
+            <button type="submit">Volver al inicio</button>
+        </form>
+    
+    </div>
 </body>
 </html>
+
+
+
 
 

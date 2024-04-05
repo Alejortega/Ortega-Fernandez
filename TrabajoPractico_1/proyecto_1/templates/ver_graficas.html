@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Gráficas</title>
+</head>
+<body>
+    <!-- Contenido de tu página aquí -->
+    <!-- Mostrar la primera gráfica -->
+    <img src="data:image/png;base64,{{ encoded_image1 }}" alt="Gráfica 1">
+    
+    <!-- Mostrar la segunda gráfica -->
+    <img src="data:image/png;base64,{{ encoded_image2 }}" alt="Gráfica 2">
+
+    <div>
+        <!-- Mostrar la gráfica -->
+        <img src="{{ url_for('ver_graficas') }}" alt="Gráfica">
+    </div>
+
+    <div>
+        <!-- Botón para descargar el PDF -->
+        <div class="button-container">
+            <a href="/generar_pdf"><button>Descargar PDF</button></a>
+        </div>
+        <!-- Botón para volver al inicio -->
+        <a href="{{ url_for('index') }}">
+            <button>Volver al Inicio</button>
+        </a>
+    </div>
+</body>
+</html>

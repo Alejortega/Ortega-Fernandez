@@ -1,8 +1,0 @@
-from modules.funciones import listar_peliculas, leer_archivo, obtener_frase_y_opciones
-nombre_archivo = "docs/frases_de_peliculas.txt"  # nombre del archivo
-peliculas = leer_archivo(nombre_archivo)
-#listar_peliculas(peliculas)
-frase, opciones, pelicula_correcta = obtener_frase_y_opciones(peliculas)
-
-print(frase, opciones, pelicula_correcta)
-print(pelicula_correcta, frase)
