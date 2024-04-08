@@ -114,8 +114,9 @@ def generar_graficas(nom_archi, num_total_preguntas ):
     for l in lineas:
         usuario, fraccion, fecha, acierto = l.strip().split(',')
         fecha_sin_hora = fecha.split()[0]
+        aciertos, total_preguntas = fraccion.strip().split('/')
         acierto_int = int(acierto)
-        num_total_frases = num_total_preguntas
+        num_total_frases = int(total_preguntas)
         desacierto = num_total_frases - acierto_int
             
         aciertos_por_fecha[fecha_sin_hora] += acierto_int
