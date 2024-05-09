@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de la carga</title>
+    <style>
+        /* Estilo para separar el botón de la alerta */
+        button {
+            margin-top: 20px; /* Ajusta este valor según sea necesario */
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultado de la carga</h1>
+    <h2>Información del cajón:</h2>
+    <ul>
+        {% for alimento in cajon %}
+        <li>{{ alimento.__class__.__name__ }} - Peso: {{ alimento.peso }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Aws promedios:</h2>
+    <p>Fruta: {{ fruta }}</p>
+    <p>Manzana: {{ promedios["Manzana"] }}</p>
+    <p>Kiwi: {{ promedios["Kiwi"] }}</p>
+    <p>Verdura: {{ verdura }}</p>
+    <p>Papa: {{ promedios["Papa"] }}</p>
+    <p>Zanahoria: {{ promedios["Zanahoria"] }}</p>
+    <p>Total: {{ promedio_total }}</p>
+    <h2>Peso total del cajón: {{ peso_cajon }}</h2>
+    {% if alerta %}
+    <h2>Se recomienda inspección del cajón, debido a:</h2>
+    <ul>
+        {% for alimento in alimento_alerta %}
+        <li>{{ alimento }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <!-- Botón para volver al índice -->
+    <form action="/" method="get">
+        <button type="submit">Cargar otro cajón</button>
+    </form>
+</body>
+</html>
+
+
+
+
+

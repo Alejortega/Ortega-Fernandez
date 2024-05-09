@@ -1,0 +1,4 @@
+Alejo,Ortega,20
+Lucio,Zenatti,20
+Ailin,Fernandez,20
+Lucas,Colona,20

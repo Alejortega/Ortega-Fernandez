@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Cajón</title>
+</head>
+<body>
+    <h1>Cargar Cajón</h1>
+
+    
+
+    <form action="/cargar_cajon" method="post">
+        <label for="cantidad">Cantidad de alimentos:</label>
+        <input type="text" id="cantidad" name="cantidad" required pattern="[1-9][0-9]*" title="La cantidad ingresada no es válida, debe ser un número entero positivo">
+        <button type="submit">Cargar Cajón</button>
+    </form>
+    
+</body>
+</html>
+
+
+
+
