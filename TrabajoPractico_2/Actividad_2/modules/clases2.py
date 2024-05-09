@@ -92,10 +92,5 @@ class CalculadoraAws:
         peso_total = sum(alimento.peso for alimento in cajon)
         return round(peso_total, 2)
 
-"""Comandos: 
-pytest Actividad_2/test
-coverage run -m pytest Actividad_2/test
-coverage report -m
 
-"""
 

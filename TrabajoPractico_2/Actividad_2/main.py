@@ -56,7 +56,7 @@ def cargar_cajon():
                            promedio_total=aw_prom_total, peso_cajon=peso, alerta=alerta, alimento_alerta=alimento_alerta)
 
 #No es necesario el "print(cajón)", como tampoco lo que muestra la template resultado que dice "Información de la carga"
-#Es para ver si las cálculos de los promedios y el número de alimentos en el cajón estan bien (sacar después)
+#Es para ver si las cálculos de los promedios y el número de alimentos en el cajón estan bien 
       
 if __name__ == '__main__':
     app.run(debug=True)
