@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Reclamos</title>
+</head>
+<body>
+    <h2>Mis Reclamos</h2>
+    <a href="{{ url_for('dashboard') }}">Volver al Panel Inicial</a>
+
+    <div>
+        {% for reclamo in reclamos %}
+            <div>
+                <h3>Reclamo {{ reclamo.id }}</h3>
+                <p>Estado: {{ reclamo.estado }}</p>
+                <p>Contenido: {{ reclamo.contenido }}</p>
+                <p>Adherentes: {{ reclamo.adherentes }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+

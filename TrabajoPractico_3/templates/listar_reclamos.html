@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Reclamos</title>
+</head>
+<body>
+    <h2>Lista de Reclamos</h2>
+    <ul>
+        {% for reclamo in reclamos %}
+            <li>
+                <strong>ID:</strong> {{ reclamo.id }}<br>
+                <strong>Estado:</strong> {{ reclamo.estado }}<br>
+                <strong>Fecha/Hora:</strong> {{ reclamo.timestamp }}<br>
+                <strong>Contenido:</strong> {{ reclamo.contenido }}<br>
+                {% if reclamo.foto %}
+                    <strong>Foto:</strong> <br>
+                    <img src="{{ url_for('static', filename='uploads/' ~ reclamo.foto) }}">
+                {% endif %}
+                <!-- Formulario para adherirse al reclamo -->
+                <form action="{{ url_for('adherirse_reclamo', id=reclamo.id) }}" method="POST">
+                    <button type="submit">Adherirse al Reclamo</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <!-- Botón para volver al inicio -->
+    <a href="{{ url_for('dashboard') }}">Volver al Inicio</a>
+</body>
+</html>
+
+

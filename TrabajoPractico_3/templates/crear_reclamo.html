@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Reclamo</title>
+</head>
+<body>
+    <h2>Crear Reclamo</h2>
+    <form action="{{ url_for('crear_reclamo') }}" method="POST" enctype="multipart/form-data">
+        <label for="contenido">Contenido del Reclamo:</label>
+        <textarea id="contenido" name="contenido" required></textarea><br>
+        
+        <label for="foto">Adjuntar Foto:</label>
+        <input type="file" id="foto" name="foto"><br>
+        
+        <button type="submit">Crear Reclamo</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Volver al Panel</a>
+</body>
+</html>
