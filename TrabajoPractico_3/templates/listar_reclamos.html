@@ -3,30 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Listar Reclamos</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #e6e6e6;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow-y: auto; /* Agregamos scroll vertical cuando sea necesario */
+            max-height: 80vh; /* Limitamos la altura para que sea al 80% de la altura de la ventana */
+        }
+        .reclamo {
+            background-color: white;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 1.5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Lista de Reclamos</h2>
-    <ul>
-        {% for reclamo in reclamos %}
-            <li>
-                <strong>ID:</strong> {{ reclamo.id }}<br>
-                <strong>Estado:</strong> {{ reclamo.estado }}<br>
-                <strong>Fecha/Hora:</strong> {{ reclamo.timestamp }}<br>
-                <strong>Contenido:</strong> {{ reclamo.contenido }}<br>
-                {% if reclamo.foto %}
-                    <strong>Foto:</strong> <br>
-                    <img src="{{ url_for('static', filename='uploads/' ~ reclamo.foto) }}">
-                {% endif %}
-                <!-- Formulario para adherirse al reclamo -->
-                <form action="{{ url_for('adherirse_reclamo', id=reclamo.id) }}" method="POST">
-                    <button type="submit">Adherirse al Reclamo</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
-    <!-- Botón para volver al inicio -->
-    <a href="{{ url_for('dashboard') }}">Volver al Inicio</a>
+    <div class="container">
+        <h2>Todos los Reclamos</h2>
+        <ul>
+            {% for reclamo in reclamos %}
+                <li class="reclamo">
+                    <p>Contenido: {{ reclamo.contenido }}</p>
+                    <p>Estado: {{ reclamo.estado }}</p>
+                    <p>Adherentes: {{ reclamo.adherentes }}</p>
+                    <p>Fecha: {{ reclamo.timestamp }}</p>
+                    <p>Departamento: {{ reclamo.departamento }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="inicio" class="back-to-top">Volver atrás</a>
 </body>
 </html>
-
 

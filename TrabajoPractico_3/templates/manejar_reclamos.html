@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manejar Reclamos</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Evita el desplazamiento vertical */
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding-bottom: 50px; /* Espacio para el botón "Volver al inicio" */
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 95%; /* Ancho del 95% del viewport */
+            max-width: 95%; /* Máximo ancho del 95% del viewport */
+            height: 90vh; /* Altura del 90% del viewport */
+            max-height: 90vh; /* Máxima altura del 90% del viewport */
+            overflow: auto; /* Scroll si el contenido desborda */
+            margin: 20px auto; /* Margen automático arriba y abajo, centrando horizontalmente */
+        }
+
+        table {
+            width: 100%; /* Asegurar que la tabla ocupe todo el ancho del contenedor */
+            max-width: 100%; /* Hacer que la tabla sea responsiva */
+            border-collapse: collapse;
+            margin: 20px 0;
+            height: 100%; /* Ajustar la altura de la tabla al 100% del contenedor */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            white-space: nowrap; /* Evita que el contenido se divida en varias líneas */
+            overflow: hidden; /* Oculta el contenido que sobresale */
+            text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el contenido sobresale */
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 1.5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+        .days-input {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleDaysInput(selectElement) {
+            var daysInput = selectElement.parentElement.querySelector('.days-input');
+            if (selectElement.value === 'en_proceso') {
+                daysInput.style.display = 'inline';
+            } else {
+                daysInput.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Manejar Reclamos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Reclamo</th>
+                    <th>ID Usuario</th>
+                    <th>ID Usuarios Adheridos</th>
+                    <th>Fecha/Hora</th>
+                    <th>Estado</th>
+                    <th>Contenido</th>
+                    <th>Foto</th>
+                    <th>Tiempo de Resolución (días)</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody id="reclamosTable">
+                {% for reclamo in reclamos %}
+                <tr>
+                    <td>{{ reclamo.id }}</td>
+                    <td>{{ reclamo.user_id }}</td>
+                    <td>{{ reclamo.adherentes }}</td>
+                    <td>{{ reclamo.timestamp }}</td>
+                    <td>{{ reclamo.estado.title() }}</td>
+                    <td>{{ reclamo.contenido }}</td>
+                    <td>
+                        {% if reclamo.foto %}
+                            <img src="{{ url_for('static', filename='uploads/' + reclamo.foto) }}" alt="Foto del reclamo" style="max-width: 100px;">
+                        {% else %}
+                            No hay foto adjunta
+                        {% endif %}
+                    </td>
+                    <td>{{ reclamo.tiempo_resolucion }}</td>
+                    <td>
+                        <form method="post" action="{{ url_for('manejar_reclamos', departamento=departamento) }}">
+                            <input type="hidden" name="reclamo_id" value="{{ reclamo.id }}">
+                            <select name="estado" onchange="toggleDaysInput(this)">
+                                <option value="pendiente" {% if reclamo.estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+                                <option value="en_proceso" {% if reclamo.estado == 'en_proceso' %}selected{% endif %}>En Proceso</option>
+                                <option value="resuelto" {% if reclamo.estado == 'resuelto' %}selected{% endif %}>Resuelto</option>
+                                <option value="invalido" {% if reclamo.estado == 'invalido' %}selected{% endif %}>Inválido</option>
+                            </select>
+                            <input type="number" name="tiempo_resolucion" class="days-input" style="display:none;" placeholder="Días de resolución" min="1" max="15" {% if reclamo.estado == 'en_proceso' %}value="{{ reclamo.tiempo_resolucion }}"{% endif %}>
+                            <button type="submit" name="accion" value="cambiar_estado">Cambiar Estado</button>
+                        </form>
+                        {% if reclamo.departamento == 'secretaría técnica' %}
+                        <form method="post" action="{{ url_for('derivar_reclamo') }}"> <!-- Cambio de acción para derivar reclamo -->
+                            <input type="hidden" name="reclamo_id" value="{{ reclamo.id }}">
+                            <select name="departamento_destino">
+                                <option value="soporte informático">Soporte Informático</option>
+                                <option value="maestranza">Maestranza</option>
+                            </select>
+                            <button type="submit" name="accion" value="derivar">Derivar Reclamo</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{{ url_for('jefe', departamento=departamento) }}" class="back-to-top">Volver al inicio</a>
+</body>
+</html>
+
+
+

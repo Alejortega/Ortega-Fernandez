@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reclamos Similares</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      width: 100%;
+    }
+
+    h2, h3 {
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .reclamo {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .reclamo .autor {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .reclamo .fecha {
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .reclamo .contenido {
+      margin-bottom: 10px;
+    }
+
+    .reclamo .info-adicional {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .button-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 20px 0 0;
+    }
+
+    .button-list li {
+      margin-bottom: 20px;
+    }
+
+    .button-list button {
+      display: block;
+      width: auto;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .button-list button:hover {
+      background-color: #0056b3;
+    }
+
+    .button-list button:active {
+      background-color: #003f7f;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Reclamos Similares</h2>
+  <h3>Hemos encontrado reclamos similares. ¿Deseas adherirte a alguno de ellos?</h3>
+  <ul class="button-list">
+    {% for reclamo in reclamos_similares %}
+      <li>
+        <div class="reclamo">
+          <div class="contenido">Contenido: {{ reclamo.contenido }}</div>
+          <div class="fecha">Fecha y Hora: {{ reclamo.timestamp.strftime('%d/%m/%Y %H:%M:%S') }}</div>
+          <div class="info-adicional">
+            <p>Estado: {{ reclamo.estado }}</p>
+            <p>Cantidad de dherentes: {{ reclamo.adherentes }}</p>
+            <p>Departamento: {{ reclamo.departamento }}</p>
+            {% if reclamo.foto %}
+              <p><img src="{{ reclamo.foto }}" alt="Foto del reclamo" style="max-width: 100%; border-radius: 10px;"></p>
+            {% endif %}
+          </div>
+          <form action="{{ url_for('adherir_reclamo') }}" method="post">
+            <input type="hidden" name="reclamo_id" value="{{ reclamo.id }}">
+            <button type="submit">Adherirse a este reclamo</button>
+          </form>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+</body>
+</html>

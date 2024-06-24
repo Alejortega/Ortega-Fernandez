@@ -3,22 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Mis Reclamos</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #e6e6e6;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fafafa;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 1.5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Mis Reclamos</h2>
-    <a href="{{ url_for('dashboard') }}">Volver al Panel Inicial</a>
-
-    <div>
-        {% for reclamo in reclamos %}
-            <div>
-                <h3>Reclamo {{ reclamo.id }}</h3>
-                <p>Estado: {{ reclamo.estado }}</p>
-                <p>Contenido: {{ reclamo.contenido }}</p>
-                <p>Adherentes: {{ reclamo.adherentes }}</p>
-            </div>
-        {% endfor %}
+    <div class="container">
+        <h2>Mis Reclamos</h2>
+        {% if reclamos %}
+            <ul>
+                {% for reclamo in reclamos %}
+                    <li>
+                        <p><strong>Contenido:</strong> {{ reclamo.contenido }}</p>
+                        <p><strong>Departamento:</strong> {{ reclamo.departamento }}</p>
+                        <p><strong>Estado:</strong> {{ reclamo.estado }}</p>
+                        <p><strong>Adherentes:</strong> {{ reclamo.adherentes }}</p>
+                        <p><strong>Fecha:</strong> {{ reclamo.timestamp }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Todavía no has realizado reclamos.</p>
+        {% endif %}
     </div>
+    <a href="inicio" class="back-to-top">Volver atrás</a>
 </body>
 </html>
-
-

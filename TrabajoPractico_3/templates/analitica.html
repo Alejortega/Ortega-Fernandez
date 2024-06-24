@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Análisis de Reclamos - {{ departamento }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .mediana {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Análisis de Reclamos - {{ departamento }}</h1>
+
+    <h2>Gráfico de Torta - Porcentaje de cada estado en los reclamos</h2>
+    <img src="{{ url_for('static', filename='grafico_torta.png') }}" alt="Gráfico de Torta">
+
+    <h2>Gráfico de Nube de Palabras - Palabras claves en reclamos</h2>
+    <img src="{{ url_for('static', filename='nube_palabras.png') }}" alt="Gráfico de Nube de Palabras">
+
+    <div class="mediana">
+        <h2>Mediana de Tiempos de Resolución</h2>
+        <p>Mediana para reclamos en proceso: {{ mediana_en_proceso }} días</p>
+        <p>Mediana para reclamos resueltos: {{ mediana_resuelto }} días</p>
+    </div>
+    
+    <br>
+    <p>¿Desea generar un reporte de la información?</p>
+
+    <form action="{{ url_for('analitica', departamento=departamento) }}" method="POST">
+        <button type="submit" name="formato" value="pdf">Generar Reporte en PDF</button>
+        <button type="submit" name="formato" value="html">Generar Reporte en HTML</button>
+    </form>
+    
+    <br>
+
+    <form action="{{ url_for('jefe', departamento=departamento) }}">
+        <button type="submit">Volver atrás</button>
+    </form>
+</body>
+</html>

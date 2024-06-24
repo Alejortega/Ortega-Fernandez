@@ -3,18 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear Reclamo</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+        .container h2 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 150px; /* Aumenta la altura mínima del textarea */
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 1.5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Crear Reclamo</h2>
-    <form action="{{ url_for('crear_reclamo') }}" method="POST" enctype="multipart/form-data">
-        <label for="contenido">Contenido del Reclamo:</label>
-        <textarea id="contenido" name="contenido" required></textarea><br>
-        
-        <label for="foto">Adjuntar Foto:</label>
-        <input type="file" id="foto" name="foto"><br>
-        
-        <button type="submit">Crear Reclamo</button>
-    </form>
-    <a href="{{ url_for('dashboard') }}">Volver al Panel</a>
+    <div class="container">
+        <h2>Crear Reclamo</h2>
+        <form method="post" enctype="multipart/form-data">
+            <label for="contenido">Contenido del Reclamo:</label>
+            <textarea id="contenido" name="contenido" required></textarea><br>
+            <label for="foto">Foto (opcional):</label>
+            <input type="file" id="foto" name="foto"><br><br>
+            <button type="submit">Crear Reclamo</button>
+        </form>
+    </div>
+    <a href="inicio" class="back-to-top">Volver atrás</a>
 </body>
 </html>

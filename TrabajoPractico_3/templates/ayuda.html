@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ayuda - {{ departamento }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .back-to-top {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+        video {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tutorial de ayuda para el Departamento de {{ departamento }}</h1>
+
+    <h2>Video de Ayuda</h2>
+    <div>
+        <video width="560" height="315" controls>
+            <source src="{{ url_for('static', filename='Ayuda Panel de Jefe.mp4') }}" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+        </video>
+    </div>
+    <a href="{{ url_for('jefe', departamento=departamento) }}" class="back-to-top">Volver atrás</a>
+</body>
+</html>
+
+
+

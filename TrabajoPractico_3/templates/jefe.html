@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Jefe - {{ departamento }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul.reclamos {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul.reclamos li {
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard del Departamento de {{ departamento }}</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('analitica', departamento=departamento) }}">Analítica</a></li>
+            <li><a href="{{ url_for('manejar_reclamos', departamento=departamento) }}">Manejar Reclamos</a></li>
+            <li><a href="{{ url_for('mostrar_video', departamento=departamento) }}">Ayuda</a></li>
+            <li><a href="{{ url_for('logout') }}">Salir</a></li>
+        </ul>
+    </nav>
+
+    <h2>Reclamos del Departamento:</h2>
+    <ul class="reclamos">
+        {% for reclamo in reclamos %}
+        <li>
+            <p><strong>Reclamo ID:</strong> {{ reclamo.id }}</p>
+            <p><strong>Contenido:</strong> {{ reclamo.contenido }}</p>
+            <p><strong>Estado:</strong> {{ reclamo.estado }}</p>
+            <p><strong>ID Usuario:</strong> {{ reclamo.user_id }}</p>
+            <p><strong>Usuarios Adheridos:</strong> {{ reclamo.adherentes }}</p>
+            <p><strong>Fecha/Hora:</strong> {{ reclamo.timestamp }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

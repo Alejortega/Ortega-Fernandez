@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Sistema de Reclamos FIUNER</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h2, h3 {
+            margin: 10px 0;
+        }
+        .button-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0 0;
+        }
+        .button-list li {
+            margin-bottom: 20px;
+        }
+        .button-list a {
+            display: inline-block;
+            width: 100%;
+            padding: 15px 0;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .button-list a:hover {
+            background-color: #0056b3;
+        }
+        .button-list a:active {
+            background-color: #003f7f;
+        }
+        .logout-button {
+            background-color: #dc3545;
+        }
+        .logout-button:hover {
+            background-color: #b02a37;
+        }
+        .logout-button:active {
+            background-color: #841f27;
+        }
+        .flash-message {
+            color: green;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bienvenido/a, {{ name }}</h2>
+        <h3>¿Qué acción deseas realizar?</h3>
+        <ul class="button-list">
+            <li><a href="{{ url_for('crear_reclamo') }}">Crear un Reclamo</a></li>
+            <li><a href="{{ url_for('mis_reclamos') }}">Ver Mis Reclamos</a></li>
+            <li><a href="{{ url_for('listar_reclamos') }}">Listar Todos los Reclamos</a></li>
+            <li><a href="{{ url_for('logout') }}" class="logout-button">Cerrar Sesión</a></li>
+        </ul>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-message">
+                    {% for category, message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
+
+
+
